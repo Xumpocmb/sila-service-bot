@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 from handlers import handler_start, handler_main_menu, handler_echo
 
 # gs
-from handlers.gs import handler_gs, handler_gs_mobile, handler_gs_computer, handler_gs_wash, handler_gs_av
+from handlers.gs import handler_gs
 
 from settings.bot_menu import set_main_menu
 # from bot_db.bot_database import db_start
@@ -36,10 +36,6 @@ async def main():
         handler_main_menu.router,
         # gs
         handler_gs.router,
-        handler_gs_mobile.router,
-        handler_gs_computer.router,
-        handler_gs_wash.router,
-        handler_gs_av.router,
 
         handler_echo.router,
     )

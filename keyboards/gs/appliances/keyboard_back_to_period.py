@@ -2,9 +2,9 @@ from aiogram.types import (
     InlineKeyboardButton, InlineKeyboardMarkup,
 )
 
-button_1: InlineKeyboardButton = InlineKeyboardButton(text='<< Назад к срокам', callback_data='gs-wash')
+button_1: InlineKeyboardButton = InlineKeyboardButton(text='<< Назад к срокам', callback_data='gs-appliances')
 
-gs_wash_back_keyboard: InlineKeyboardMarkup = InlineKeyboardMarkup(
+gs_appliances_back_keyboard: InlineKeyboardMarkup = InlineKeyboardMarkup(
     inline_keyboard=[
         [
             button_1,

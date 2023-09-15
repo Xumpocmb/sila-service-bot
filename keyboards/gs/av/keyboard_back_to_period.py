@@ -4,7 +4,7 @@ from aiogram.types import (
 
 button_1: InlineKeyboardButton = InlineKeyboardButton(text='<< Назад к срокам', callback_data='gs-av')
 
-gs_keyboard: InlineKeyboardMarkup = InlineKeyboardMarkup(
+gs_av_back_keyboard: InlineKeyboardMarkup = InlineKeyboardMarkup(
     inline_keyboard=[
         [
             button_1,
