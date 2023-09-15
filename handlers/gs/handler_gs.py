@@ -45,6 +45,22 @@ async def send_t_shirt(callback: CallbackQuery):
     await callback.answer()
 
 
+@router.callback_query(F.data == 'gs-av')
+async def gs_av(callback: CallbackQuery):
+    await callback.message.answer(text='ГС для Аудио-Видео техники.\nВыберите действие', reply_markup=gs_av_keyboard)
+    await callback.answer()
+
+
+@router.callback_query(F.data == 'gs-av-premium-plus-12')
+@router.callback_query(F.data == 'gs-av-repeat-12')
+@router.callback_query(F.data == 'gs-av-premium-plus-36')
+@router.callback_query(F.data == 'gs-av-premium-plus-48')
+async def gs_av_other(callback: CallbackQuery):
+    db_info = get_info_from_db(gs_id=callback.data, table='gs_av')
+    await callback.message.answer(text=f'<b>{db_info[0]}</b>\n<i>{db_info[1]}</i>', reply_markup=gs_av_back_keyboard)
+    await callback.answer()
+
+
 @router.callback_query(F.data == 'gs-appliances')
 async def gs_appliances(callback: CallbackQuery):
     await callback.message.answer(text='ГС для Бытовой техники.\nВыберите действие', reply_markup=gs_appliances_keyboard)
@@ -58,6 +74,13 @@ async def gs_appliances_other(callback: CallbackQuery):
     db_info = get_info_from_db(gs_id=callback.data, table='gs_appliances')
     await callback.message.answer(text=f'<b>{db_info[0]}</b>\n<i>{db_info[1]}</i>', reply_markup=gs_appliances_back_keyboard)
     await callback.answer()
+
+
+@router.callback_query(F.data == 'gs-mobile')
+async def gs_mobile(callback: CallbackQuery):
+    await callback.message.answer(text='ГС для мобильных устройств.\nВыберите действие', reply_markup=gs_mobile_keyboard)
+    await callback.answer()
+
 
 @router.callback_query(F.data == 'gs-mobile-12')
 @router.callback_query(F.data == 'gs-mobile-24')
@@ -95,3 +118,23 @@ async def gs_wash_other(callback: CallbackQuery):
     db_info = get_info_from_db(gs_id=callback.data, table='gs_coffee_machine')
     await callback.message.answer(text=f'<b>{db_info[0]}</b>\n<i>{db_info[1]}</i>', reply_markup=gs_coffee_machine_back_keyboard)
     await callback.answer()
+
+
+@router.callback_query(F.data == 'gs-computer')
+async def gs_computer(callback: CallbackQuery):
+    await callback.message.answer(text='ГС для компьютерной техники.\nВыберите действие', reply_markup=gs_computer_keyboard)
+    await callback.message.delete()
+    await callback.answer()
+
+
+@router.callback_query(F.data == 'gs-computer-24')
+@router.callback_query(F.data == 'gs-computer-premium-24')
+@router.callback_query(F.data == 'gs-computer-36')
+@router.callback_query(F.data == 'gs-computer-premium-36')
+@router.callback_query(F.data == 'gs-computer-repeat-24')
+async def gs_computer_other(callback: CallbackQuery):
+    db_info = get_info_from_db(gs_id=callback.data, table='gs_computer')
+    await callback.message.answer(text=f'<b>{db_info[0]}</b>\n<i>{db_info[1]}</i>', reply_markup=gs_computer_back_keyboard)
+    await callback.answer()
+
+
