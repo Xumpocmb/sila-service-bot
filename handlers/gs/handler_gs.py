@@ -38,14 +38,35 @@ def get_info_from_db(gs_id, table):
                 db.close()
 
 
+def get_tables():
+    conn = sqlite3.connect('sila.db')
+    cursor = conn.cursor()
+    tables = cursor.execute("SELECT name FROM sqlite_master WHERE type='table';").fetchall()
+    conn.close()
+    return tables
+
+
+def make_kb():
+    table_list = get_tables()
+    buttons = []
+
+    for table in table_list:
+        button_text = table[0]
+        buttons.append(InlineKeyboardButton(text=button_text, callback_data=button_text))
+    buttons = [[button] for button in buttons]
+    keyboard = InlineKeyboardMarkup(inline_keyboard=buttons)
+    return keyboard
+
+
 @router.callback_query(F.data == 'gs')
 async def send_t_shirt(callback: CallbackQuery):
-    await callback.message.answer(text='Вы находитесь в меню ГС.\nВыберите действие..', reply_markup=gs_keyboard)
+    kb = make_kb()
+    await callback.message.answer(text='Вы находитесь в меню ГС.\nВыберите действие..', reply_markup=kb)
     await callback.message.delete()
     await callback.answer()
 
 
-@router.callback_query(F.data == 'gs-appliances')
+@router.callback_query(F.data == 'gs_appliances')
 async def gs_appliances(callback: CallbackQuery):
     await callback.message.answer(text='ГС для Бытовой техники.\nВыберите действие', reply_markup=gs_appliances_keyboard)
     await callback.answer()
