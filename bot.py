@@ -3,15 +3,13 @@ import logging
 import os
 
 from aiogram import Bot, Dispatcher
-from aiogram.fsm.strategy import FSMStrategy
 from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.fsm.strategy import FSMStrategy
 from dotenv import load_dotenv
 
 from handlers import handler_start, handler_contract_gs, handler_main_menu, handler_echo
-
-# gs
 from handlers.gs import handler_gs
-
+from handlers.admin_panel import handler_admin_main
 from settings.bot_menu import set_main_menu
 from utils.send_admin_notify import send_notify_start, send_notify_finish
 
@@ -34,7 +32,7 @@ async def main():
     dp.include_routers(
         handler_start.router,
         handler_main_menu.router,
-        # gs
+        handler_admin_main.router,
         handler_contract_gs.router,
         handler_gs.router,
 
@@ -46,12 +44,12 @@ async def main():
     # start
     try:
         await bot.delete_webhook(drop_pending_updates=True)
-        await send_notify_start(bot)
+        # await send_notify_start(bot)
         dp.startup.register(set_main_menu)
         # await db_start()
         await dp.start_polling(bot)
     finally:
-        await send_notify_finish(bot)
+        # await send_notify_finish(bot)
         await bot.session.close()
 
 

@@ -50,7 +50,8 @@ class DB:
         self.connection, self.cursor = self.check_connection()
         if self.connection and self.cursor:
             try:
-                result = self.cursor.execute("SELECT gs_id, gs_name FROM {table_name}".format(table_name=table)).fetchall()
+                result = self.cursor.execute(
+                    "SELECT gs_id, gs_name FROM {table_name}".format(table_name=table)).fetchall()
                 return result
             except sqlite3.Error as e:
                 print("Ошибка SQLite:", e)
