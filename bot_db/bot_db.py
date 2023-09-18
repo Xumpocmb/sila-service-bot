@@ -16,19 +16,6 @@ class DB:
             print(f'Ошибка: {e}')
             return None, None
 
-    def get_tables(self):
-        self.connection, self.cursor = self.check_connection()
-        try:
-            tables = self.cursor.execute("SELECT name FROM sqlite_master WHERE type='table';").fetchall()
-            return tables
-        except Exception as e:
-            print(e)
-        finally:
-            if self.cursor:
-                self.cursor.close()
-            if self.connection:
-                self.connection.close()
-
     def get_gs(self, gs_id, table):
         self.connection, self.cursor = self.check_connection()
         if self.connection and self.cursor:
