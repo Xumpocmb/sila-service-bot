@@ -14,5 +14,5 @@ async def echo(message: Message):
 @router.callback_query()
 async def gs_any_callback(callback: CallbackQuery):
     print(callback.data)
-    await callback.message.reply('Не известная команда')
+    await callback.message.reply('Не известная команда', reply_markup=main_menu_keyboard)
     await callback.answer()
