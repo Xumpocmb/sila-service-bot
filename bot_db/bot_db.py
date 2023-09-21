@@ -125,8 +125,39 @@ class DB:
         if self.connection and self.cursor:
             try:
                 result = self.cursor.execute(
-                    "SELECT install_name, install_description FROM {table_name} WHERE install_id == '{key}'".format(key=install_id,
-                                                                                                     table_name=table)).fetchone()
+                    "SELECT install_name, install_description FROM {table_name} WHERE install_id == '{key}'".format(
+                        key=install_id,
+                        table_name=table)).fetchone()
+                return result
+            except sqlite3.Error as e:
+                print("Ошибка SQLite:", e)
+            finally:
+                if self.cursor:
+                    self.cursor.close()
+                if self.connection:
+                    self.connection.close()
+
+    def get_insurances(self):
+        self.connection, self.cursor = self.check_connection()
+        if self.connection and self.cursor:
+            try:
+                result = self.cursor.execute("SELECT id, name FROM insurance").fetchall()
+                return result
+            except sqlite3.Error as e:
+                print("Ошибка SQLite:", e)
+            finally:
+                if self.cursor:
+                    self.cursor.close()
+                if self.connection:
+                    self.connection.close()
+
+    def get_insurance_description(self, insurance_id):
+        self.connection, self.cursor = self.check_connection()
+        if self.connection and self.cursor:
+            try:
+                result = self.cursor.execute(
+                    "SELECT for_what, from_what, payments FROM insurance where id='{insurance_id}'".format(
+                        insurance_id=insurance_id)).fetchone()
                 return result
             except sqlite3.Error as e:
                 print("Ошибка SQLite:", e)

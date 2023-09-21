@@ -7,7 +7,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.fsm.strategy import FSMStrategy
 from dotenv import load_dotenv
 
-from handlers import handler_start, handler_contract_gs, handler_main_menu, handler_echo, handler_prevention, handler_gs, handler_installation
+from handlers import handler_start, handler_contract_gs, handler_main_menu, handler_echo, handler_prevention, handler_gs, handler_installation, handler_insurance
 from handlers.admin_panel import handler_admin_main
 from settings.bot_menu import set_main_menu
 
@@ -35,6 +35,7 @@ async def main():
         handler_gs.router,
         handler_prevention.router,
         handler_installation.router,
+        handler_insurance.router,
 
 
         handler_echo.router,
