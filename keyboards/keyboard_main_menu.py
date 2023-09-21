@@ -4,11 +4,11 @@ from aiogram.types import (
 
 
 button_1: InlineKeyboardButton = InlineKeyboardButton(text='ГС', callback_data='gs')
-button_2: InlineKeyboardButton = InlineKeyboardButton(text='Установка', callback_data='install')
+button_2: InlineKeyboardButton = InlineKeyboardButton(text='Установка', callback_data='installations')
 button_3: InlineKeyboardButton = InlineKeyboardButton(text='Договор ГС', callback_data='contract')
 button_4: InlineKeyboardButton = InlineKeyboardButton(text='IT-сервис', callback_data='service')
 button_5: InlineKeyboardButton = InlineKeyboardButton(text='Страховка', callback_data='insurance')
-button_6: InlineKeyboardButton = InlineKeyboardButton(text='Админ-панель', callback_data='admin_panel')
+button_6: InlineKeyboardButton = InlineKeyboardButton(text='Профилактика', callback_data='preventions')
 
 
 main_menu_keyboard: InlineKeyboardMarkup = InlineKeyboardMarkup(

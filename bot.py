@@ -7,11 +7,9 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.fsm.strategy import FSMStrategy
 from dotenv import load_dotenv
 
-from handlers import handler_start, handler_contract_gs, handler_main_menu, handler_echo
-from handlers.gs import handler_gs
+from handlers import handler_start, handler_contract_gs, handler_main_menu, handler_echo, handler_prevention, handler_gs, handler_installation
 from handlers.admin_panel import handler_admin_main
 from settings.bot_menu import set_main_menu
-from utils.send_admin_notify import send_notify_start, send_notify_finish
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
@@ -35,6 +33,8 @@ async def main():
         handler_admin_main.router,
         handler_contract_gs.router,
         handler_gs.router,
+        handler_prevention.router,
+        handler_installation.router,
 
 
         handler_echo.router,
