@@ -28,6 +28,7 @@ async def installation_type_periods(callback: CallbackQuery):
 @router.callback_query(F.data.startswith('install-'))
 async def installation_type_period_info(callback: CallbackQuery):
     table_name = f"{callback.data.split('-')[0]}_{callback.data.split('-')[1]}"
+    print(callback.data, table_name)
     db_info = DB('sila_installation.db').get_installation(install_id=callback.data, table=table_name)
     await callback.message.answer(text=f'<b>{db_info[0]}</b>\n<i>{db_info[1]}</i>',
                                   reply_markup=make_back_to_periods_keyboard(table_name))
