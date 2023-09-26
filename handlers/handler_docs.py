@@ -36,3 +36,10 @@ async def send_doc_additional(callback: CallbackQuery):
     document = FSInputFile('docs/DopService.pdf')
     await callback.message.answer_document(document, caption='Доп Сервис', reply_markup=main_menu_keyboard)
     await callback.answer()
+
+
+@router.callback_query(F.data == 'doc-podryada')
+async def send_doc_additional(callback: CallbackQuery):
+    document = FSInputFile('docs/Ustanovka.pdf')
+    await callback.message.answer_document(document, caption='Установка', reply_markup=main_menu_keyboard)
+    await callback.answer()
