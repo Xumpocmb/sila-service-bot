@@ -25,14 +25,14 @@ async def send_doc_gs(callback: CallbackQuery):
 
 
 @router.callback_query(F.data == 'doc-profilaktica')
-async def send_doc_gs(callback: CallbackQuery):
-    document = FSInputFile('docs/DopService.pdf')
-    await callback.message.answer_document(document, caption='Доп Сервис', reply_markup=main_menu_keyboard)
+async def send_doc_profilaktica(callback: CallbackQuery):
+    document = FSInputFile('docs/Profilaktika.pdf')
+    await callback.message.answer_document(document, caption='Профилактика', reply_markup=main_menu_keyboard)
     await callback.answer()
 
 
 @router.callback_query(F.data == 'doc-additional')
-async def send_doc_gs(callback: CallbackQuery):
-    document = FSInputFile('docs/Profilaktika.pdf')
-    await callback.message.answer_document(document, caption='Профилактика', reply_markup=main_menu_keyboard)
+async def send_doc_additional(callback: CallbackQuery):
+    document = FSInputFile('docs/DopService.pdf')
+    await callback.message.answer_document(document, caption='Доп Сервис', reply_markup=main_menu_keyboard)
     await callback.answer()
