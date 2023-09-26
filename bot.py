@@ -7,14 +7,15 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.fsm.strategy import FSMStrategy
 from dotenv import load_dotenv
 
-from handlers import handler_start, handler_contract_gs, handler_main_menu, handler_echo, handler_prevention, handler_gs, handler_installation, handler_insurance
+from handlers import handler_start, handler_contract_gs, handler_main_menu, handler_echo, handler_prevention, \
+    handler_gs, handler_installation, handler_insurance, handler_it_service
 from handlers.admin_panel import handler_admin_main
 from settings.bot_menu import set_main_menu
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
-        level=logging.INFO,
-        format=u'%(filename)s:%(lineno)d #%(levelname)-8s [%(asctime)s] - %(name)s - %(message)s',
+    level=logging.INFO,
+    format=u'%(filename)s:%(lineno)d #%(levelname)-8s [%(asctime)s] - %(name)s - %(message)s',
 )
 
 load_dotenv()
@@ -24,7 +25,6 @@ dp: Dispatcher = Dispatcher(storage=MemoryStorage(), fsm_strategy=FSMStrategy.US
 
 # Запуск бота
 async def main():
-
     logger.info("Starting bot")
 
     dp.include_routers(
@@ -36,7 +36,7 @@ async def main():
         handler_prevention.router,
         handler_installation.router,
         handler_insurance.router,
-
+        handler_it_service.router,
 
         handler_echo.router,
     )

@@ -166,3 +166,48 @@ class DB:
                     self.cursor.close()
                 if self.connection:
                     self.connection.close()
+
+    def get_all_tables(self):
+        self.connection, self.cursor = self.check_connection()
+        if self.connection and self.cursor:
+            try:
+                result = self.cursor.execute("SELECT id, name FROM all_tables").fetchall()
+                return result
+            except sqlite3.Error as e:
+                print("Ошибка SQLite:", e)
+            finally:
+                if self.cursor:
+                    self.cursor.close()
+                if self.connection:
+                    self.connection.close()
+
+    def get_id_rows_from_table(self, tablename):
+        self.connection, self.cursor = self.check_connection()
+        if self.connection and self.cursor:
+            try:
+                result = self.cursor.execute("SELECT id, name FROM {table_name}".format(table_name=tablename)).fetchall()
+                return result
+            except sqlite3.Error as e:
+                print("Ошибка SQLite:", e)
+            finally:
+                if self.cursor:
+                    self.cursor.close()
+                if self.connection:
+                    self.connection.close()
+
+    def get_description(self, itservice_id, table):
+        self.connection, self.cursor = self.check_connection()
+        if self.connection and self.cursor:
+            try:
+                result = self.cursor.execute(
+                    "SELECT name, description FROM {table_name} WHERE id == '{key}'".format(
+                        key=itservice_id,
+                        table_name=table)).fetchone()
+                return result
+            except sqlite3.Error as e:
+                print("Ошибка SQLite:", e)
+            finally:
+                if self.cursor:
+                    self.cursor.close()
+                if self.connection:
+                    self.connection.close()
